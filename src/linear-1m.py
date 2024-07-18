@@ -6,10 +6,10 @@ file_path = 'data/1m.xlsx'
 data = pd.read_excel(file_path)
 
 data['Data'] = pd.to_datetime(data['Data'])
-train_data = data[(data['Data'] >= '2010-01-01') & (data['Data'] <= '2020-12-31')]
-test_data = data[data['Data'].dt.year == 2021]
+train_data = data[(data['Data'] >= '2010-01-01') & (data['Data'] <= '2021-12-31')]
+test_data = data[data['Data'].dt.year == 2022]
 
-columns_to_scale = ['Dollar', 'Selic', 'IPCA', 'CDS']
+columns_to_scale = ['Dólar', 'Selic', 'IPCA', 'CDS']
 
 scaler = RobustScaler()
 
@@ -25,11 +25,11 @@ X_test = test_data[columns_to_scale]
 
 X_test_scaled = scaler.transform(X_test)
 
-predictions_2021 = model.predict(X_test_scaled)
+predictions_2022 = model.predict(X_test_scaled)
 
-test_data['ETTJ - 1m_Predicted'] = predictions_2021
+test_data['ETTJ - 1m_Predicted'] = predictions_2022
 
-print("Previsões para ETTJ - 1m em 2021:")
+print("Previsões para ETTJ - 1m em 2022:")
 print(test_data[['Data', 'ETTJ - 1m', 'ETTJ - 1m_Predicted']])
 
 
